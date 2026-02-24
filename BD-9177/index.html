@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding -->
+  <meta charset="UTF-8">
+
+  <!-- Makes layout responsive on all devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Page title shown in browser tab -->
+  <title>Semantic Layout</title>
+
+
+  <style>
+  
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  background-color: #f9fafb;
+}
+
+/* header */
+header {
+  padding: 1.5rem;
+  background-color: #76787c;
+  color: #ffffff;
+}
+
+header img {
+  max-width: 160px;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* flexbox */
+nav {
+  background-color: #e7e3e3;
+  padding: 1rem;
+  padding: 12px;
+  margin: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #000;
+}
+
+nav a:focus,
+nav a:hover {
+  outline: 2px solid #2563eb;
+}
+
+/* main content */
+main {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+section {
+  margin-bottom: 1.5rem;
+}
+/* .dashboard */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.dashboard section {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 6px;
+}
+/* article */
+article {
+  background-color: #ffffff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #2563eb;
+}
+
+/* aside */
+aside {
+  background-color: #f1f5f9;
+  padding: 1rem;
+  border-radius: 6px;
+}
+/* form  */
+form {
+  max-width: 400px;
+  margin: auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input:focus {
+  outline: 2px solid #2563eb;
+}
+
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ===============================
+   FOOTER
+=============================== */
+footer {
+  background-color: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+/* ===============================
+   RESPONSIVE BREAKPOINT
+=============================== */
+@media (min-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- ===============================
+       HEADER
+       Contains logo, site title,
+       and brand description
+  =============================== -->
+  <header>
+    <!-- Logo with meaningful alt text for screen readers -->
+    <img
+      src="https://www.medianv.com/wp-content/uploads/2023/03/logo.png.webp"
+      alt="Company logo">
+
+    <!-- Main page heading -->
+    <h1>My Company</h1>
+
+    <!-- Company tagline -->
+    <p>Data Driven Medical Marketing</p>
+  </header>
+
+ <!-- NAVIGATION
+       Primary site navigation
+       aria-label helps screen readers -->
+  <nav aria-label="Main navigation">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+<!-- main section -->
+  <main>
+     <!-- INTRO SECTION
+         Primary business content -->
+    <section>
+      <h2>Get Your Free Website Audit</h2>
+      <p>
+        We analyze your website and compare it with competitors
+        to help you improve your online presence.
+      </p>
+    </section>
+
+    <!-- ===============================
+         DASHBOARD SECTION
+         Grid-based layout for features
+    =============================== -->
+    <section class="dashboard">
+
+      <!-- Individual feature block -->
+      <section>
+        <h3>Facilities</h3>
+        <p>
+          Providing best facilities to the medical care system.
+        </p>
+      </section>
+
+      <!-- Individual feature block -->
+      <section>
+        <h3>Contact</h3>
+        <p>
+          Connect with us and make your system stand out.
+        </p>
+      </section>
+
+    </section>
+
+    <!--
+         ARTICLES SECTION
+         aria-labelledby links heading
+         for accessibility -->
+    <section aria-labelledby="browsers-heading">
+      <h2 id="browsers-heading">Popular Web Browsers</h2>
+
+      <!-- Independent, reusable content -->
+      <article>
+        <h3>Google Chrome</h3>
+        <p>
+          Google Chrome is a browser developed by Google
+          and released in 2008.
+        </p>
+      </article>
+
+      <!-- Independent, reusable content -->
+      <article>
+        <h3>Mozilla Firefox</h3>
+        <p>
+          Mozilla Firefox is an open-source browser
+          developed by Mozilla.
+        </p>
+      </article>
+
+      <!-- Independent, reusable content -->
+      <article>
+        <h3>Microsoft Edge</h3>
+        <p>
+          Microsoft Edge is a browser developed by Microsoft
+          and replaced Internet Explorer.
+        </p>
+      </article>
+
+    </section>
+
+    <!-- ASIDE Supplementary / related content-->
+    <aside>
+      <h3>Did you know?</h3>
+      <p>
+        All modern browsers support HTML5
+        and open web standards.
+      </p>
+    </aside>
+
+    <!--  FORM SECTION
+         Accessible, labeled input -->
+    <section>
+      <h2 style="text-align: center;">Login</h2>
+
+      <form class="form">
+        <!-- Name field -->
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          required>
+
+        <!-- Email field -->
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          required>
+
+        <!-- Password field -->
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          required>
+
+        <!-- Submit button -->
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- FOOTER Legal and copyright info-->
+  <footer>
+    <p>&copy; 2026 My Company</p>
+  </footer>
+
+</body>
+</html>
