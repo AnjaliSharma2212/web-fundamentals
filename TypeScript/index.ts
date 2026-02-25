@@ -87,10 +87,10 @@ interface Person {
 }
 // this says if you want to become person you must have these fields
 
-let student: Person ={
-    name:"Alice",
-    age:23,
-    greet(){
+let student: Person = {
+    name: "Alice",
+    age: 23,
+    greet() {
         console.log(`My name is ${this.name}`)
     }
 }
@@ -100,23 +100,23 @@ let student: Person ={
 //TYpe Guard
 
 // Type narrowing
-function printId(id: string | number){
-    if(typeof id==="string"){
-    console.log(id.toUpperCase())
-}else{
-    console.log("Your id is", id)
-}
+function printId(id: string | number) {
+    if (typeof id === "string") {
+        console.log(id.toUpperCase())
+    } else {
+        console.log("Your id is", id)
+    }
 }
 printId(4)
 
 //Type Guard
-function isString(val:unknown) : val is string{
-    return typeof val==="string"
+function isString(val: unknown): val is string {
+    return typeof val === "string"
 }
-function logValue(val:unknown){
-    if(isString(val)){
+function logValue(val: unknown) {
+    if (isString(val)) {
         console.log(val.toUpperCase())
-    }else{
+    } else {
         console.log("Not a string")
     }
 }
@@ -129,22 +129,126 @@ logValue("Alice")
 // Use TYPES when we want to use tuples and union
 //types alias
 type Point = {
-x:number,
-y:number
+    x: number,
+    y: number
 }
 
-interface Shape{
+interface Shape {
     area(): number
 }
 
 //class implementing interface
 // implements means I will follow interface rules
-class Rectangle implements Shape{
-    constructor(private width:number, private height:number){}
+class Rectangle implements Shape {
+    constructor(private width: number, private height: number) { }
     area(): number {
         return this.width * this.height
     }
 }
 
 // union type
-function displayType(value: string | number):void{}
+function displayType(value: string | number): void { }
+
+//Typing Props
+
+interface ButtonProps { // props means Instructions for Components
+    label: string,
+    onClick: () => void,
+    disabled?: boolean
+}
+
+
+function Button(props: ButtonProps): void {
+    console.log(`Buttton label: ${props.label}`)
+    if (props.disabled) {
+        console.log("Buttton is disabled")
+    } else {
+        props.onClick()
+    }
+}
+
+
+Button({
+    label: "Submit",
+    onClick: () => console.log("Buttton clicked")
+})
+
+Button({
+    label: "Cancel",
+    onClick: () => console.log("Buttton clicked"),
+    disabled: true
+})
+
+//label is string 
+//disabled is a function
+
+
+//state in types
+interface State {
+    count: number,
+    text: string
+}
+
+let appState: State = {
+    count: 45,
+    text: "HellO JS"
+}
+
+
+function incrementCount(state: State): State {
+    return { ...state, count: state.count + 1 }
+}
+appState = incrementCount(appState)
+console.log(appState)
+
+
+//API Response
+
+interface APIresponse<T> {
+    data: T,
+    status: number,
+    error?: string
+}
+
+interface User {
+    id: number,
+    name: string,
+    email: string,
+}
+
+function fetchUser(): APIresponse<User> {
+    return {
+        data: {
+            id: 1,
+            name: "Anjali",
+            email: "anjali@example.com"
+        },
+        status: 200
+    }
+}
+
+const response = fetchUser()
+
+if(response.status===200){
+    console.log(response.data.name)
+}
+
+//Avoiding of using ANY
+// using unknown is safe as we need to check the type explicitly
+function checkProcess(val: unknown): void{
+if(typeof val==="string"){
+    val.toUpperCase()
+}else if(typeof val==="number"){
+    val.toFixed(3)
+}else{
+    console.log("Unsupported type")
+}
+}
+
+function processValue(val:any): void{
+    val.toUpperCase() //  no error , avoids type check
+}
+
+processValue("Anjali")
+processValue(4)
+processValue(true)
